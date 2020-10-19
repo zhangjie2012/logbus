@@ -1,4 +1,4 @@
-package input
+package logbus
 
 import (
 	"context"
@@ -10,7 +10,6 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/vmihailenco/msgpack"
 	"github.com/zhangjie2012/cbl-go/cache"
-	"github.com/zhangjie2012/logbus"
 )
 
 func TestRedisListInput(t *testing.T) {
@@ -24,11 +23,11 @@ func TestRedisListInput(t *testing.T) {
 	require.Nil(t, err)
 
 	go func() {
-		l := logbus.StandardLog{
+		l := StandardLog{
 			AppName:   appName,
 			Timestamp: timestamp,
 			Level:     level.String(),
-			StateId:   logbus.StateIdInvalid,
+			StateId:   StateIdInvalid,
 			Caller:    "",
 			Message:   msg,
 		}

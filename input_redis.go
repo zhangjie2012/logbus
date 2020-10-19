@@ -1,4 +1,4 @@
-package input
+package logbus
 
 import (
 	"context"
@@ -7,7 +7,6 @@ import (
 
 	"github.com/vmihailenco/msgpack"
 	"github.com/zhangjie2012/cbl-go/cache"
-	"github.com/zhangjie2012/logbus"
 )
 
 // RedisListInput data from redis LIST
@@ -22,7 +21,7 @@ func NewRedisListInput(app string, addr string, password string, db int, key str
 	return &RedisListInput{listKey: key}, nil
 }
 
-func (input *RedisListInput) Read(ctx context.Context) (*logbus.StandardLog, error) {
+func (input *RedisListInput) Read(ctx context.Context) (*StandardLog, error) {
 
 Loop:
 	select {
@@ -37,7 +36,7 @@ Loop:
 			return nil, fmt.Errorf("read data error: %s", err)
 		}
 
-		l := logbus.StandardLog{}
+		l := StandardLog{}
 		if err := msgpack.Unmarshal(bs, &l); err != nil {
 			return nil, fmt.Errorf("marshal log error: %s", err)
 		}

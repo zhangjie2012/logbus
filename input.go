@@ -1,15 +1,13 @@
-package input
+package logbus
 
 import (
 	"context"
 	"fmt"
-
-	"github.com/zhangjie2012/logbus"
 )
 
 var NoInputData = fmt.Errorf("no input data")
 
 type Input interface {
-	Read(ctx context.Context) (*logbus.StandardLog, error)
+	Read(ctx context.Context) (*StandardLog, error)
 	Close() error
 }
