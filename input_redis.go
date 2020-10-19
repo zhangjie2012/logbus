@@ -21,14 +21,14 @@ func NewRedisListInput(app string, addr string, password string, db int, key str
 	return &RedisListInput{listKey: key}, nil
 }
 
-func (input *RedisListInput) Read(ctx context.Context) (*StandardLog, error) {
+func (in *RedisListInput) Read(ctx context.Context) (*StandardLog, error) {
 
 Loop:
 	select {
 	case <-ctx.Done():
 		return nil, NoInputData
 	default:
-		bs, err := cache.MQBlockPop(input.listKey, 1*time.Second)
+		bs, err := cache.MQBlockPop(in.listKey, 1*time.Second)
 		if err != nil {
 			if err == cache.NotExist {
 				goto Loop
@@ -44,7 +44,7 @@ Loop:
 	}
 }
 
-func (input *RedisListInput) Close() error {
+func (in *RedisListInput) Close() error {
 	cache.CloseCache()
 	return nil
 }
