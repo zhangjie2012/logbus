@@ -36,6 +36,5 @@
 
    =go get github.com/zhangjie2012/logbus=
 
-   For example code =example/main.go=, log from redis list and to stdout/MongoDB,
-   It's a real scenes for me.
-   Your can implement your =input=, =output=, =transformer= and call =Serve= built up.
+   For example code =example/main.go=, log from redis list and to stdout/MongoDB, It's a real scenes for me.
+   You can implement your =input=, =output=, =transformer= and call =Serve= built up.
