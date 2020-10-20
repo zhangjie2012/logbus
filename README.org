@@ -20,17 +20,17 @@
 
 ** Intro
 
-   logbus define a standard log format =StdLog=, default I use [[https://github.com/zhangjie2012/logrusredis-hook][logrusredis-hook]] output log to redis
-   =LIST= by =StandardLogWash=, but it is not necessary.
+   logbus define a standard log format =StdLog=, I use [[https://github.com/zhangjie2012/logrusredis-hook][logrusredis-hook]] output log to redis
+   =LIST= by =StandardLogWash=, but all of this is not necessary.
 
-   *Only* need your log format must be =StandardLog=, and use [[https://msgpack.org/][msgpack]] marshal.
+   logbus a pipeline framework, the core task is =Read= and =Write=, checkout =Serve= code.
+   *Only* you need do it inplement your owne =input=, =output=, =transformer=
+   (of course, you can use default, or PR a new).
 
    For data processing, it provide:
 
    - =DefaultTransformer= do nothing, all log passed.
    - =StatLogTransformer= only pass which log has a valid =StateId=
-
-   your can custom a =TransformerFunc=, or PR.
 
 ** Usage
 
