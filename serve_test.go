@@ -21,12 +21,13 @@ func TestServe(t *testing.T) {
 	// fake data
 	go func() {
 		l := StdLog{
-			AppName:   appName,
-			Timestamp: timestamp,
-			Level:     level.String(),
-			StateId:   StateIdInvalid,
-			Caller:    "",
-			Message:   msg,
+			AppName:     appName,
+			Timestamp:   timestamp,
+			Level:       level.String(),
+			StateId:     StateIdInvalid,
+			Caller:      "",
+			Message:     msg,
+			Annotations: map[string]interface{}{"hello": "world"},
 		}
 		bs, err := msgpack.Marshal(&l)
 		require.Nil(t, err)
@@ -40,7 +41,7 @@ func TestServe(t *testing.T) {
 	in, err := NewRedisListInput(appName, "localhost:6379", "", 0, logKey)
 	require.Nil(t, err)
 
-	out, err := NewStdoutOutput()
+	out, err := NewStdoutOutput(DefaultTransformer)
 	require.Nil(t, err)
 
 	ctx, cancel := context.WithCancel(context.Background())
