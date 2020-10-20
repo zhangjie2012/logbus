@@ -1,32 +1,41 @@
 * Logbus
 
-  logbus 是一个日志消费服务，消费由 [[https://github.com/zhangjie2012/logrusredis-hook][logrusredis-hook]] 上报到 Redis List 的日志，收集到其他渠道中。
+  *In development, do not use it in production.*
 
-  与 logrusredis-hook 是弱耦合的，只要数据格式保持统一即可。
+  logbus is a log processing pipeline that from one =input datasource= like message queue,
+  to =multiple output channel= like stdout, files, common store db (MongoDB, MySQL, ES).
 
-** 设计准则
+  You can implement your own input/output interface.
 
-   支持多种输出渠道，可以串行，以 callback 的方式配接。
+  *Note*: logbus is not support distribute, and it's a stateful service.
 
-   比如普遍的两种需求，集中日志存储、状态日志用于做数据统计分析；
-   这种情况下可以设置两种输出渠道，第一种完全输出，第一种按照日志 id 做筛选。
+** Feature
 
-** 支持程度
+   - Input source
+	 + [X] Redis List
+   - Output channel
+	 + [X] Stdout
+	 + [-] MongoDB
+   - Your can custom a transformer callback function processing log decide finally output log
 
-   目前只个人用，所以先按个人需求来。
+** Intro
 
-*** 输入
+   logbus define a standard log format =StdLog=, default I use [[https://github.com/zhangjie2012/logrusredis-hook][logrusredis-hook]] output log to redis
+   =LIST= by =StandardLogWash=, but it is not necessary.
 
-	| 输入源     | 是否支持 |
-	|------------+----------|
-	| Redis List | Yes      |
-	| Kafka      | No       |
+   *Only* need your log format must be =StandardLog=, and use [[https://msgpack.org/][msgpack]] marshal.
 
-*** 输出
+   For data processing, it provide:
 
-	| Output Channel | Yes/No |
-	|----------------+--------|
-	| local files    | Yes    |
-	| MongoDB        | Yes    |
-	| MySQL          | No     |
-	| ElasticSearch  | No     |
+   - =DefaultTransformer= do nothing, all log passed.
+   - =StatLogTransformer= only pass which log has a valid =StateId=
+
+   your can custom a =TransformerFunc=, or PR.
+
+** Usage
+
+   =go get github.com/zhangjie2012/logbus=
+
+   For example code =example/main.go=, log from redis list and to stdout/MongoDB,
+   It's a real scenes for me.
+   Your can implement your =input=, =output=, =transformer= and call =Serve= built up.
