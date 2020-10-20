@@ -15,7 +15,7 @@
 	 + [X] Redis List
    - Output channel
 	 + [X] Stdout
-	 + [-] MongoDB
+	 + [X] MongoDB
    - Your can custom a transformer callback function processing log decide finally output log
 
 ** Intro
