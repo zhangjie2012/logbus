@@ -1,6 +1,0 @@
-redis:
-  appname: logbus
-  addr: localhost:8080
-  password:
-  db: 0
-  listkey: "_log"

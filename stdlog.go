@@ -17,13 +17,13 @@ const StateIdInvalid string = "_invalid"
 //   - AppName define where log from
 //   - Annotations for struct log or message expand
 type StdLog struct {
-	AppName     string                 `msgpack:"appname"`
-	Timestamp   int64                  `msgpack:"timestamp"`
-	Level       string                 `msgpack:"level"`
-	StateId     string                 `msgpack:"stateid"`
-	Caller      string                 `msgpack:"caller"`
-	Message     string                 `msgpack:"message"`
-	Annotations map[string]interface{} `msgpack:"annotations"`
+	AppName     string                 `msgpack:"appname" bson:"appname"`
+	Timestamp   int64                  `msgpack:"timestamp" bson:"timestamp"`
+	Level       string                 `msgpack:"level" bson:"level"`
+	StateId     string                 `msgpack:"stateid" bson:"stateid"`
+	Caller      string                 `msgpack:"caller" bson:"caller"`
+	Message     string                 `msgpack:"message" bson:"message"`
+	Annotations map[string]interface{} `msgpack:"annotations" bson:"annotations"`
 }
 
 func newStdLog(appName string, t time.Time, metadata logrus.Fields, caller *runtime.Frame, level logrus.Level, message string) *StdLog {
