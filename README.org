@@ -7,7 +7,7 @@
 
   You can implement your own input/output interface.
 
-  *Note*: logbus is not support distribute, and it's a stateful service.
+  *Note*: logbus is not support distribute.
 
 ** Feature
 
