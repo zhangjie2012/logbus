@@ -1,6 +1,6 @@
 package logbus
 
 type Output interface {
-	Write(l *StandardLog) error
+	Write(l *StdLog) error
 	Close() error
 }

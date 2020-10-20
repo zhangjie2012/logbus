@@ -21,7 +21,7 @@ func NewRedisListInput(app string, addr string, password string, db int, key str
 	return &RedisListInput{listKey: key}, nil
 }
 
-func (in *RedisListInput) Read(ctx context.Context) (*StandardLog, error) {
+func (in *RedisListInput) Read(ctx context.Context) (*StdLog, error) {
 
 Loop:
 	select {
@@ -36,7 +36,7 @@ Loop:
 			return nil, fmt.Errorf("read data error: %s", err)
 		}
 
-		l := StandardLog{}
+		l := StdLog{}
 		if err := msgpack.Unmarshal(bs, &l); err != nil {
 			return nil, fmt.Errorf("marshal log error: %s", err)
 		}

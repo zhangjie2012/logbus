@@ -23,7 +23,7 @@ func TestRedisListInput(t *testing.T) {
 	require.Nil(t, err)
 
 	go func() {
-		l := StandardLog{
+		l := StdLog{
 			AppName:   appName,
 			Timestamp: timestamp,
 			Level:     level.String(),

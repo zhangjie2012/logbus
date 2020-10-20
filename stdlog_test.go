@@ -9,14 +9,14 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestStandardLog(t *testing.T) {
+func TestStdLog(t *testing.T) {
 	appName := "logbus"
 	now := time.Now()
 	metadata := logrus.Fields{"stateid": "register", "ip": "127.0.0.1", "userid": "zhangjie2012"}
 	level := logrus.DebugLevel
 	message := "hello, world"
 
-	l := newStandardLog(appName, now, metadata, nil, level, message)
+	l := newStdLog(appName, now, metadata, nil, level, message)
 	require.NotNil(t, l)
 
 	assert.Equal(t, appName, l.AppName)

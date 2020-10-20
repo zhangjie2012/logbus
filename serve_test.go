@@ -20,7 +20,7 @@ func TestServe(t *testing.T) {
 
 	// fake data
 	go func() {
-		l := StandardLog{
+		l := StdLog{
 			AppName:   appName,
 			Timestamp: timestamp,
 			Level:     level.String(),

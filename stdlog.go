@@ -16,7 +16,7 @@ const StateIdInvalid string = "_invalid"
 // StandardLog standard log format
 //   - AppName define where log from
 //   - Annotations for struct log or message expand
-type StandardLog struct {
+type StdLog struct {
 	AppName     string                 `msgpack:"appname"`
 	Timestamp   int64                  `msgpack:"timestamp"`
 	Level       string                 `msgpack:"level"`
@@ -26,7 +26,7 @@ type StandardLog struct {
 	Annotations map[string]interface{} `msgpack:"annotations"`
 }
 
-func newStandardLog(appName string, t time.Time, metadata logrus.Fields, caller *runtime.Frame, level logrus.Level, message string) *StandardLog {
+func newStdLog(appName string, t time.Time, metadata logrus.Fields, caller *runtime.Frame, level logrus.Level, message string) *StdLog {
 	caller_ := ""
 	if caller != nil {
 		caller_ = fmt.Sprintf("%s:%d", filepath.Base(caller.File), caller.Line)
@@ -44,7 +44,7 @@ func newStandardLog(appName string, t time.Time, metadata logrus.Fields, caller 
 		}
 	}
 
-	l := StandardLog{
+	l := StdLog{
 		AppName:     appName,
 		Timestamp:   t.UnixNano(),
 		Level:       level.String(),
@@ -57,10 +57,10 @@ func newStandardLog(appName string, t time.Time, metadata logrus.Fields, caller 
 	return &l
 }
 
-// LogWashFunc redefined "LogWashFunc" in logrusredis-hook
+// StdLogWash redefined "LogWashFunc" in logrusredis-hook
 // use "StandardLog" replace logrusredis-hook's "DefaultLogS"
-func StandardLogWash(appName string, t time.Time, metadata logrus.Fields, caller *runtime.Frame, level logrus.Level, message string) []byte {
-	l := newStandardLog(appName, t, metadata, caller, level, message)
+func StdLogWash(appName string, t time.Time, metadata logrus.Fields, caller *runtime.Frame, level logrus.Level, message string) []byte {
+	l := newStdLog(appName, t, metadata, caller, level, message)
 	bs, err := msgpack.Marshal(&l)
 	if err != nil {
 		return nil

@@ -79,7 +79,7 @@ func Serve(ctx context.Context, in Input, outputs []Output) {
 	}
 }
 
-func readOne(in Input) (*StandardLog, error) {
+func readOne(in Input) (*StdLog, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	return in.Read(ctx)

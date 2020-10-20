@@ -21,7 +21,7 @@
 ** Intro
 
    logbus define a standard log format =StdLog=, I use [[https://github.com/zhangjie2012/logrusredis-hook][logrusredis-hook]] output log to redis
-   =LIST= by =StandardLogWash=, but all of this is not necessary.
+   =LIST= by =StdLogWash=, but all of this is not necessary.
 
    logbus a pipeline framework, the core task is =Read= and =Write=, checkout =Serve= code.
    *Only* you need do it inplement your owne =input=, =output=, =transformer=
