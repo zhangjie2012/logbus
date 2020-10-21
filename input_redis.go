@@ -15,7 +15,7 @@ type RedisListInput struct {
 	listKey string
 }
 
-func NewRedisListInput(app string, addr string, password string, db int, key string) (Input, error) {
+func NewRedisListInput(addr string, password string, db int, key string) (Input, error) {
 	client := redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: password,

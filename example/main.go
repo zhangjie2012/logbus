@@ -34,7 +34,6 @@ func init() {
 //   dbname:
 type ServerOption struct {
 	Redis struct {
-		AppName  string `yaml:"appname"`
 		Addr     string `yaml:"addr"`
 		Password string `yaml:"password"`
 		Db       int    `yaml:"db"`
@@ -72,7 +71,6 @@ func main() {
 	}
 
 	in, err := logbus.NewRedisListInput(
-		option.Redis.AppName,
 		option.Redis.Addr,
 		option.Redis.Password,
 		option.Redis.Db,
