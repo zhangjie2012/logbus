@@ -1,13 +1,11 @@
 # Logbus
 
-**In development, do not use it in production.**
-
 logbus is a log processing pipeline that from one `input datasource` like message queue,
 to `multiple output channel` like stdout, files, common store db (MongoDB, MySQL, ES).
 
 You can implement your own input/output interface.
 
-**Note**: logbus is not support distribute.
+**Note**: logbus is not support distributed deploy.
 
 ## Feature
 
@@ -37,7 +35,7 @@ For data processing, it provide:
 go get github.com/zhangjie2012/logbus
 ```
 
-For example code `example/main.go`, log from redis `LIST` and to stdout/MongoDB, It's a real scenes for me.
+For example code `example/main.go`, log from redis `LIST` and to stdout/MongoDB, It's a real scenes for me (already running in prod env).
 You can implement your `input`, `output`, `transformer` and call `Serve` built up.
 
 ## TODO
